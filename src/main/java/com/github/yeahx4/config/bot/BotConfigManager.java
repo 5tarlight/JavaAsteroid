@@ -1,6 +1,7 @@
 package com.github.yeahx4.config.bot;
 
 import com.github.yeahx4.Main;
+import com.github.yeahx4.util.Logger;
 
 import java.io.*;
 import java.util.Properties;
@@ -9,6 +10,8 @@ public class BotConfigManager {
     final static public String path = "config.properties";
 
     public static void writeNewConfig() {
+        Logger logger = new Logger("ConfigManager");
+
         try (OutputStream output = new FileOutputStream(path)) {
             Properties props = new Properties();
 
@@ -16,9 +19,9 @@ public class BotConfigManager {
             props.setProperty("bot.prefix", "!");
 
             props.store(output, null); // Write properties into local file
-            System.out.println("[INFO] New config.properties has been set up");
+            logger.log("New config.properties has been set up");
         } catch (IOException io) {
-            io.printStackTrace();
+            logger.err(io.getMessage());
         }
     }
 
