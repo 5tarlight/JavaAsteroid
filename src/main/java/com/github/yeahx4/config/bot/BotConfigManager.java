@@ -1,6 +1,5 @@
 package com.github.yeahx4.config.bot;
 
-import com.github.yeahx4.Main;
 import com.github.yeahx4.util.Logger;
 
 import java.io.*;
