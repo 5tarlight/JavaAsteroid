@@ -1,5 +1,7 @@
 package com.github.yeahx4;
 
+import com.github.yeahx4.command.CommandManager;
+import com.github.yeahx4.command.handler.Ping;
 import com.github.yeahx4.config.bot.BotConfigManager;
 import com.github.yeahx4.listener.MessageReceiveListener;
 import com.github.yeahx4.util.Logger;
@@ -24,8 +26,10 @@ public class Main {
                 throw new NullPointerException();
             }
 
+            CommandManager.addHandler(new Ping());
+
             JDA api = JDABuilder.createDefault(config.getProperty("bot.token")).build();
-            api.addEventListener(new MessageReceiveListener());
+            api.addEventListener(new MessageReceiveListener(api));
             logger.success("Bot started");
         } catch (LoginException ex1) {
             logger.err("Fail to log in Discord");
